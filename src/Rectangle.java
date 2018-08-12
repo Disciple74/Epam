@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Rectangle {
+class Rectangle {
     private final int X = 0, Y = 1;
     private int[][] rectangle = new int[4][];
     {
@@ -8,13 +8,21 @@ public class Rectangle {
             rectangle[i] = new int[2];
         }
     }
-    double diagonal;
+    private double diagonal;
     int[][] getRectangle(){
         return this.rectangle;
     }
     Rectangle(){
         initRectangle(initDiagonal());
         this.diagonalLength();
+    }
+    Rectangle(int[] pointOne, int[] pointTwo){
+        int[] coordinates = new int[pointOne.length+pointTwo.length];
+        for (int i = 0; i < pointOne.length; i++){
+            coordinates[i] = pointOne[i];
+            coordinates[i+pointOne.length] = pointTwo[i];
+        }
+        initRectangle(coordinates);
     }
 
     private int[] initDiagonal(){
@@ -91,7 +99,7 @@ public class Rectangle {
         else return rectangle[2];
     }
     private int[] getGroundY(){
-        if (rectangle[0][Y] < rectangle[1][Y])
+        if (rectangle[0][Y] > rectangle[1][Y])
             return rectangle[1];
         else return rectangle[0];
     }
@@ -105,7 +113,7 @@ public class Rectangle {
         else return rectangle[2];
     }
     private int[] getHighY(){
-        if (rectangle[0][Y] > rectangle[1][Y])
+        if (rectangle[0][Y] < rectangle[1][Y])
             return rectangle[1];
         else return rectangle[0];
     }
